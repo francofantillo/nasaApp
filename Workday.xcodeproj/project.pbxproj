@@ -14,6 +14,18 @@
 		BA3C8156293B13FF00106EFC /* WorkdayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8155293B13FF00106EFC /* WorkdayTests.swift */; };
 		BA3C8160293B13FF00106EFC /* WorkdayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */; };
 		BA3C8162293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */; };
+		BA3C816F293B144B00106EFC /* DataServiceCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C816E293B144B00106EFC /* DataServiceCombine.swift */; };
+		BA3C8171293B271E00106EFC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8170293B271E00106EFC /* Extensions.swift */; };
+		BAA74487293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */; };
+		BAA74489293BEB5900CE4DD2 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74488293BEB5900CE4DD2 /* Errors.swift */; };
+		BAA7448B293C0C4A00CE4DD2 /* NasaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA7448A293C0C4A00CE4DD2 /* NasaData.swift */; };
+		BAA7448E293C724600CE4DD2 /* NasaCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA7448D293C724600CE4DD2 /* NasaCollection.swift */; };
+		BAA74490293C737100CE4DD2 /* NasaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA7448F293C737100CE4DD2 /* NasaItem.swift */; };
+		BAA74492293C752A00CE4DD2 /* NasaLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74491293C752A00CE4DD2 /* NasaLinks.swift */; };
+		BAA74494293C764500CE4DD2 /* CollectionLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74493293C764500CE4DD2 /* CollectionLinks.swift */; };
+		BAA74496293C889500CE4DD2 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74495293C889500CE4DD2 /* DataService.swift */; };
+		BAA74498293DB03F00CE4DD2 /* NasaItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74497293DB03F00CE4DD2 /* NasaItems.swift */; };
+		BAA7449A293DF0EB00CE4DD2 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74499293DF0EB00CE4DD2 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +57,18 @@
 		BA3C815B293B13FF00106EFC /* WorkdayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkdayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayUITests.swift; sourceTree = "<group>"; };
 		BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BA3C816E293B144B00106EFC /* DataServiceCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceCombine.swift; sourceTree = "<group>"; };
+		BA3C8170293B271E00106EFC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlingViewModifier.swift; sourceTree = "<group>"; };
+		BAA74488293BEB5900CE4DD2 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		BAA7448A293C0C4A00CE4DD2 /* NasaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaData.swift; sourceTree = "<group>"; };
+		BAA7448D293C724600CE4DD2 /* NasaCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaCollection.swift; sourceTree = "<group>"; };
+		BAA7448F293C737100CE4DD2 /* NasaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItem.swift; sourceTree = "<group>"; };
+		BAA74491293C752A00CE4DD2 /* NasaLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaLinks.swift; sourceTree = "<group>"; };
+		BAA74493293C764500CE4DD2 /* CollectionLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionLinks.swift; sourceTree = "<group>"; };
+		BAA74495293C889500CE4DD2 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		BAA74497293DB03F00CE4DD2 /* NasaItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItems.swift; sourceTree = "<group>"; };
+		BAA74499293DF0EB00CE4DD2 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				BA3C8143293B13FE00106EFC /* WorkdayApp.swift */,
-				BA3C8145293B13FE00106EFC /* ContentView.swift */,
+				BAA7448C293C0C5000CE4DD2 /* Models */,
+				BA3C8173293B273200106EFC /* Networking */,
+				BA3C8174293B274800106EFC /* UI */,
+				BA3C8172293B272600106EFC /* Utility */,
 				BA3C8147293B13FF00106EFC /* Assets.xcassets */,
 				BA3C8149293B13FF00106EFC /* Workday.entitlements */,
 				BA3C814A293B13FF00106EFC /* Preview Content */,
@@ -127,6 +154,47 @@
 				BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */,
 			);
 			path = WorkdayUITests;
+			sourceTree = "<group>";
+		};
+		BA3C8172293B272600106EFC /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				BAA74488293BEB5900CE4DD2 /* Errors.swift */,
+				BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */,
+				BA3C8170293B271E00106EFC /* Extensions.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		BA3C8173293B273200106EFC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				BA3C816E293B144B00106EFC /* DataServiceCombine.swift */,
+				BAA74495293C889500CE4DD2 /* DataService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		BA3C8174293B274800106EFC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BAA74499293DF0EB00CE4DD2 /* SearchBar.swift */,
+				BA3C8145293B13FE00106EFC /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BAA7448C293C0C5000CE4DD2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BAA7448A293C0C4A00CE4DD2 /* NasaData.swift */,
+				BAA7448D293C724600CE4DD2 /* NasaCollection.swift */,
+				BAA74493293C764500CE4DD2 /* CollectionLinks.swift */,
+				BAA7448F293C737100CE4DD2 /* NasaItem.swift */,
+				BAA74497293DB03F00CE4DD2 /* NasaItems.swift */,
+				BAA74491293C752A00CE4DD2 /* NasaLinks.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +327,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA3C816F293B144B00106EFC /* DataServiceCombine.swift in Sources */,
+				BAA74490293C737100CE4DD2 /* NasaItem.swift in Sources */,
 				BA3C8146293B13FE00106EFC /* ContentView.swift in Sources */,
+				BAA74496293C889500CE4DD2 /* DataService.swift in Sources */,
+				BAA7448B293C0C4A00CE4DD2 /* NasaData.swift in Sources */,
 				BA3C8144293B13FE00106EFC /* WorkdayApp.swift in Sources */,
+				BAA74487293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift in Sources */,
+				BAA7449A293DF0EB00CE4DD2 /* SearchBar.swift in Sources */,
+				BAA74494293C764500CE4DD2 /* CollectionLinks.swift in Sources */,
+				BAA74489293BEB5900CE4DD2 /* Errors.swift in Sources */,
+				BAA7448E293C724600CE4DD2 /* NasaCollection.swift in Sources */,
+				BAA74492293C752A00CE4DD2 /* NasaLinks.swift in Sources */,
+				BA3C8171293B271E00106EFC /* Extensions.swift in Sources */,
+				BAA74498293DB03F00CE4DD2 /* NasaItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
