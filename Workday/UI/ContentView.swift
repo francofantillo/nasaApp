@@ -15,13 +15,36 @@ struct ContentView: View {
     @State var searchString = ""
     @FocusState var focus
     
-    private func getNasaItems(){
+    var searchStringBinding: Binding<String> { Binding (
+
+        get: {
+            return self.searchString
+        },
+
+        set: {
+            guard $0 != "" else {
+                nasaItems.items = []
+                self.searchString = $0
+                return
+            }
+            guard self.searchString != $0 else { return }
+            self.searchString = $0
+            self.getNasaItems(searchString: $0)
+        })
+    }
+    
+    private func getNasaItems(searchString: String){
         Task {
             do {
                 let service = DataService()
                 let collection = try await service.getNasaData(searchString: searchString)
-                nasaItems.items = collection.items
+                DispatchQueue.main.async {
+                    nasaItems.items = collection.items
+                }
             } catch let error as APIErrors {
+                errorHandling.handle(error: error)
+            }
+            catch let error {
                 errorHandling.handle(error: error)
             }
         }
@@ -30,12 +53,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
-            SearchBar(text: $searchString, focusBinding: $focus, onEditMethod: getNasaItems)
+            SearchBar(text: searchStringBinding, focusBinding: $focus, onEditMethod: nil)
             List {
                 ForEach(nasaItems.items) { item in
                    
-                   InvoiceCell(invoice: invoice.wrappedValue)
-                        .background(NavigationLink("", value: Route.invoiceOverview(ObservableInvoice(invoice: invoice.wrappedValue), false)).opacity(0))
+                    NasaCell(vm: NasaCell.NasaCellViewModel(title: item.data[0].title, imageURL: item.links[0].href, description: item.data[0].description, dateCreated:   item.data[0].date_created))
                    .padding([.leading, .trailing],-16)
                    .listRowBackground(Color.clear)
                    .listRowSeparator(.hidden)
