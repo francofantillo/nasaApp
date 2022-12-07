@@ -65,7 +65,7 @@ class DataService: DataServiceProtocol {
         components.host = "images-api.nasa.gov"
         components.path = "/search"
         components.queryItems = [
-            URLQueryItem(name: "q", value: "apollo"),
+            URLQueryItem(name: "q", value: searchValue),
             URLQueryItem(name: "page", value: "1"),
             URLQueryItem(name: "media_type", value: "image")
         ]

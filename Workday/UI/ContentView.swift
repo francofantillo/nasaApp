@@ -57,11 +57,26 @@ struct ContentView: View {
             List {
                 ForEach(nasaItems.items) { item in
                    
-                    NasaCell(vm: NasaCell.NasaCellViewModel(title: item.data[0].title, imageURL: item.links[0].href, description: item.data[0].description, dateCreated:   item.data[0].date_created))
-                   .padding([.leading, .trailing],-16)
-                   .listRowBackground(Color.clear)
-                   .listRowSeparator(.hidden)
-                   .buttonStyle(PlainButtonStyle())
+                    if let data = item.data {
+
+                        NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "" , imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ?? ""))
+
+                            .padding([.leading, .trailing],-16)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .buttonStyle(PlainButtonStyle())
+
+
+
+                    } else {
+                        NasaCell(vm: NasaCell.NasaCellViewModel(title: "1", imageURL: "2", description: "3", dateCreated: "4"))
+                        
+                            .padding([.leading, .trailing],-16)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .buttonStyle(PlainButtonStyle())
+                    }
+
                }
                
            }
