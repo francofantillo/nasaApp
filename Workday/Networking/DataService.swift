@@ -42,7 +42,7 @@ class DataService: DataServiceProtocol {
         guard let url = components.url else {
             throw APIErrors.apiError
         }
-    
+        print(url)
         return try await getNextPage(nextURL: url)
     }
     

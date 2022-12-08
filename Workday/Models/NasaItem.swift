@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct NasaItem: Decodable, Identifiable {
+struct NasaItem: Decodable, Identifiable, Equatable {
+    
+    static func == (lhs: NasaItem, rhs: NasaItem) -> Bool {
+        lhs.id == rhs.id
+    }
     
     enum CodingKeys: CodingKey {
         case data
