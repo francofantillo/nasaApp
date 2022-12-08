@@ -8,8 +8,9 @@
 import Combine
 import SwiftUI
 
-struct ContentView: View {
+struct NasaList: View {
     
+
     @EnvironmentObject private var errorHandling: ErrorHandling
     @StateObject var nasaItems = NasaItems(items: [])
     @State var searchString = ""
@@ -50,6 +51,15 @@ struct ContentView: View {
         }
     }
     
+    private func getDetailsVM(item: NasaItem) -> DetailScreen.DetailScreenViewModel {
+        
+        let vm = DetailScreen.DetailScreenViewModel(title: item.data[0].title ?? "",
+                                                imageURL: item.links[0].href,
+                                                description:item.data[0].description ?? "" ,
+                                                    date: item.data[0].date_created)
+        return vm
+    }
+    
     var body: some View {
         VStack {
             
@@ -58,13 +68,16 @@ struct ContentView: View {
                 ForEach(nasaItems.items) { item in
                    
                     if let data = item.data {
+                        
 
-                        NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "" , imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ?? ""))
+                            NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "" , imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ))
 
-                            .padding([.leading, .trailing],-16)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .buttonStyle(PlainButtonStyle())
+                                .padding([.leading, .trailing],-16)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .buttonStyle(PlainButtonStyle())
+    
+
 
 
 
@@ -88,12 +101,15 @@ struct ContentView: View {
         }
         .padding()
         .background(Color("Primary"))
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle("Nasa Search")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NasaList()
     }
 }

@@ -17,46 +17,50 @@ struct NasaCell: View {
     
     var body: some View {
         
-        VStack {
+        NavigationLink(value: Route.detailScreen(viewModel: DetailScreen.DetailScreenViewModel(title: vm.title, imageURL: vm.imageURL, description: vm.description ?? "", date: vm.dateCreated))) {
             
-            HStack {
+            VStack {
                 
-                AsyncImage(url: URL(string: vm.imageURL)) { phase in
-                    switch phase {
+                HStack {
+                    
+                    AsyncImage(url: URL(string: vm.imageURL)) { phase in
+                        switch phase {
                         case .failure:
                             Image(systemName: "photo")
                                 .font(.largeTitle)
                         case .success(let image):
                             image
                                 .resizable()
+                                .aspectRatio(contentMode: .fill)
                         default: ProgressView()
+                        }
                     }
+                    .frame(width: 50, height: 50)
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                    .padding(.trailing)
+                    
+                    Text(vm.title)
+                        .foregroundColor(.black)
+                    Spacer()
+                    
                 }
-                .frame(width: 50, height: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
-                .padding(.trailing)
                 
-                Text(vm.title)
-                    .foregroundColor(.black)
-                Spacer()
+                Rectangle()
+                    .frame(height: 2, alignment: .center)
+                    .foregroundColor(Color.black)
                 
+                HStack {
+                    Text(vm.description ?? "")
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(3)
+                    Spacer()
+                }
             }
+            .padding()
+            .background(Color("LightGray"))
+            .cornerRadius(10)
             
-            Rectangle()
-                .frame(height: 2, alignment: .center)
-                .foregroundColor(Color.black)
-
-            HStack {
-                Text(vm.description ?? "")
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(3)
-                Spacer()
-            }
         }
-        .padding()
-        .background(Color("LightGray"))
-        .cornerRadius(10)
-        //.shadow(color: Color("LightGray"), radius: 5, x: 0, y: 0)
     }
 }
 

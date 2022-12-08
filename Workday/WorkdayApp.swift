@@ -10,11 +10,29 @@ import SwiftUI
 @main
 struct WorkdayApp: App {
     
+    init(){
+        
+        UINavigationBar.appearance().titleTextAttributes = [ .foregroundColor: UIColor.white ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [ .foregroundColor: UIColor.white ]
+        //UINavigationBar.appearance().backgroundColor = UIColor.lightGray
+        
+        
+        UICollectionView.appearance().backgroundColor = .clear
+        UITextField.appearance().keyboardAppearance = UIKeyboardAppearance.light
+
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+        
+        UIScrollView.appearance().backgroundColor = .clear
+    }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .withErrorHandling()
+            NavigationStack{
+                NasaList()
+                    .withErrorHandling()
+                    .router()
+            }
         }
     }
 }
