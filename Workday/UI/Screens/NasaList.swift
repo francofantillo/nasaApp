@@ -12,8 +12,8 @@ struct NasaList: View {
     
     @EnvironmentObject private var errorHandling: ErrorHandling
     @StateObject var nasaItems = NasaItems(items: [])
-    @State var searchString = ""
     @FocusState var focus
+    @State var searchString = ""
     @State var nextPageLink: String = ""
     
     var searchStringBinding: Binding<String> { Binding (
@@ -35,24 +35,39 @@ struct NasaList: View {
         })
     }
     
+    private func appendNewData(collection: NasaCollection){
+        DispatchQueue.main.async {
+            nasaItems.items.append(contentsOf: collection.items)
+            handleNextLinks(collection: collection)
+        }
+    }
+    
+    private func setNewdata(collection: NasaCollection){
+        DispatchQueue.main.async {
+            nasaItems.items = collection.items
+            handleNextLinks(collection: collection)
+        }
+    }
+    
+    private func handleNextLinks(collection: NasaCollection){
+        
+        guard let links = collection.links else { return }
+        for link in links {
+            if link.rel == "next" {
+                nextPageLink = link.href
+                nextPageLink = nextPageLink.replace(target: "http", withString:"https")
+            }
+        }
+    }
+    
     private func getNextPage(){
         Task {
             do {
                 let service = DataService()
-                guard let url = URL(string: nextPageLink) else {
-                    throw APIError.invalidResponse
-                }
+                let url = try service.constructURLFromString(urlString: nextPageLink)
                 let collection = try await service.getNextPage(nextURL: url)
-                DispatchQueue.main.async {
-                    nasaItems.items.append(contentsOf: collection.items)
-                    guard let links = collection.links else { return }
-                    for link in links {
-                        if link.rel == "next" {
-                            nextPageLink = link.href
-                            nextPageLink = nextPageLink.replace(target: "http", withString:"https")
-                        }
-                    }
-                }
+                appendNewData(collection: collection)
+
             } catch let error as APIErrors {
                 errorHandling.handle(error: error)
             }
@@ -67,16 +82,8 @@ struct NasaList: View {
             do {
                 let service = DataService()
                 let collection = try await service.getNasaData(searchString: searchString)
-                DispatchQueue.main.async {
-                    nasaItems.items = collection.items
-                    guard let links = collection.links else { return }
-                    for link in links {
-                        if link.rel == "next" {
-                            nextPageLink = link.href
-                            nextPageLink = nextPageLink.replace(target: "http", withString:"https")
-                        }
-                    }
-                }
+                setNewdata(collection: collection)
+
             } catch let error as APIErrors {
                 errorHandling.handle(error: error)
             }
@@ -86,14 +93,7 @@ struct NasaList: View {
         }
     }
     
-    private func getDetailsVM(item: NasaItem) -> DetailScreen.DetailScreenViewModel {
-        
-        let vm = DetailScreen.DetailScreenViewModel(title: item.data[0].title ?? "",
-                                                imageURL: item.links[0].href,
-                                                description:item.data[0].description ?? "" ,
-                                                    date: item.data[0].date_created)
-        return vm
-    }
+
     
     var body: some View {
         VStack {
@@ -106,30 +106,25 @@ struct NasaList: View {
                         
                         if let data = item.data {
                             
-                            
-                            NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "" , imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ))
-                            
-                                .padding([.leading, .trailing],-16)
-                                .listRowBackground(Color.clear)
-                                .listRowSeparator(.hidden)
-                                .buttonStyle(PlainButtonStyle())
-                                .onAppear(){
-                                    if nasaItems.items.last == item {
-                                        getNextPage()
+                            //if !data.isEmpty {
+                                NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "", imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ))
+                                
+                                    .padding([.leading, .trailing],-16)
+                                    .listRowBackground(Color.clear)
+                                    .listRowSeparator(.hidden)
+                                    .buttonStyle(PlainButtonStyle())
+                                    .onAppear(){
+                                        if nasaItems.items.last == item {
+                                            getNextPage()
+                                        }
                                     }
-                                }
+                            //}
                         }
                     }
-                    
-                    ProgressView()
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .buttonStyle(PlainButtonStyle())
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(PlainListStyle())
                 .padding([.leading, .trailing])
-                 
             }
             Spacer()
         }

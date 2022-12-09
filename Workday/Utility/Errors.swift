@@ -7,15 +7,33 @@
 
 import Foundation
 
+struct APIErrorMessage: Decodable {
+  var error: Bool
+  var reason: String
+}
+
 enum APIErrors: Error {
-    case apiError
+    /// Invalid request, e.g. invalid URL
+      case invalidRequestError
+    /// Indicates an error on the transport layer, e.g. not being able to connect to the server
+      case transportError
+    ///The resoonse was not in a usable format.
+      case invalidResponseError
+    ///Server returned an improper status code
+      case validationError(String)
 }
 
 extension APIErrors: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .apiError:
-            return NSLocalizedString("Encountered an api error.", comment: "api error.")
+        case .invalidRequestError:
+            return NSLocalizedString("Request was not valid.", comment: "Request error.")
+        case .transportError:
+            return NSLocalizedString("There was an error commuinicating with the server.", comment: "Transport error.")
+        case .invalidResponseError:
+            return NSLocalizedString("The reponse was not valid", comment: "Response error.")
+        case .validationError(let errorMessage):
+            return NSLocalizedString(errorMessage, comment: "Validation error.")
         }
     }
 }

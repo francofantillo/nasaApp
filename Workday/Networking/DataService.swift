@@ -15,24 +15,6 @@ protocol DataServiceProtocol {
     func getNasaData(searchString: String) async throws -> NasaCollection
 }
 
-struct APIErrorMessage: Decodable {
-  var error: Bool
-  var reason: String
-}
-
-enum APIError: LocalizedError {
-  /// Invalid request, e.g. invalid URL
-  case invalidRequestError(String)
-  
-  /// Indicates an error on the transport layer, e.g. not being able to connect to the server
-  case transportError(Error)
-    
-
-    case invalidResponse
-    
-    case validationError(String)
-}
-
 class DataService: DataServiceProtocol {
     
     func getNasaData(searchString: String) async throws -> NasaCollection {
@@ -40,9 +22,9 @@ class DataService: DataServiceProtocol {
         let components = constructURL(searchValue: searchString)
 
         guard let url = components.url else {
-            throw APIErrors.apiError
+            throw APIErrors.invalidRequestError
         }
-        print(url)
+
         return try await getNextPage(nextURL: url)
     }
     
@@ -72,10 +54,17 @@ class DataService: DataServiceProtocol {
         return components
     }
     
+    func constructURLFromString(urlString: String) throws -> URL {
+        guard let url = URL(string: urlString) else {
+            throw APIErrors.invalidRequestError
+        }
+        return url
+    }
+    
     private func checkResponse(response: URLResponse, data: Data) throws {
         
         guard let urlResponse = response as? HTTPURLResponse else {
-            throw APIError.invalidResponse
+            throw APIErrors.invalidResponseError
         }
 
         if (200..<300) ~=  urlResponse.statusCode {
@@ -85,8 +74,12 @@ class DataService: DataServiceProtocol {
             let decoder = JSONDecoder()
             let apiError = try decoder.decode(APIErrorMessage.self, from: data)
 
-            if urlResponse.statusCode == 400 {
-                throw APIError.validationError(apiError.reason)
+            if (400..<499) ~=  urlResponse.statusCode {
+                throw APIErrors.validationError(apiError.reason)
+            }
+            
+            if 500 < urlResponse.statusCode {
+                throw APIErrors.validationError(apiError.reason)
             }
         }
     }
