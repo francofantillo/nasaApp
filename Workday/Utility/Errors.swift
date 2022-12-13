@@ -16,7 +16,7 @@ enum APIErrors: Error {
     /// Invalid request, e.g. invalid URL
       case invalidRequestError
     /// Indicates an error on the transport layer, e.g. not being able to connect to the server
-      case transportError
+      case transportError(String)
     ///The resoonse was not in a usable format.
       case invalidResponseError
     ///Server returned an improper status code
@@ -28,8 +28,8 @@ extension APIErrors: LocalizedError {
         switch self {
         case .invalidRequestError:
             return NSLocalizedString("Request was not valid.", comment: "Request error.")
-        case .transportError:
-            return NSLocalizedString("There was an error commuinicating with the server.", comment: "Transport error.")
+        case .transportError(let errorMessage):
+            return NSLocalizedString("Communication with server failed with error: \(errorMessage)", comment: "Transport error.")
         case .invalidResponseError:
             return NSLocalizedString("The reponse was not valid", comment: "Response error.")
         case .validationError(let errorMessage):

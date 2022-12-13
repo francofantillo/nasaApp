@@ -15,6 +15,7 @@ struct NasaList: View {
     @FocusState var focus
     @State var searchString = ""
     @State var nextPageLink: String = ""
+    let service = DataService(client: HttpClient(session: URLSession.shared))
     
     var searchStringBinding: Binding<String> { Binding (
 
@@ -31,6 +32,7 @@ struct NasaList: View {
             }
             guard self.searchString != $0 else { return }
             self.searchString = $0
+            nextPageLink = ""
             self.getNasaItems(searchString: $0)
         })
     }
@@ -52,10 +54,19 @@ struct NasaList: View {
     private func handleNextLinks(collection: NasaCollection){
         
         guard let links = collection.links else { return }
+        
+        guard !links.isEmpty else {
+            nextPageLink = ""
+            return
+        }
+        
         for link in links {
             if link.rel == "next" {
                 nextPageLink = link.href
                 nextPageLink = nextPageLink.replace(target: "http", withString:"https")
+            }
+            if link.rel == "prev" && links.count == 1 {
+                nextPageLink = ""
             }
         }
     }
@@ -63,10 +74,20 @@ struct NasaList: View {
     private func getNextPage(){
         Task {
             do {
-                let service = DataService()
+
+                guard nextPageLink != "" else { return }
                 let url = try service.constructURLFromString(urlString: nextPageLink)
-                let collection = try await service.getNextPage(nextURL: url)
-                appendNewData(collection: collection)
+                service.getCollectionData(nextURL: url, completion: { inner in
+                        do {
+                            let collection = try inner()
+                            appendNewData(collection: collection)
+                        } catch let error as APIErrors {
+                            errorHandling.handle(error: error)
+                        }
+                        catch let error {
+                            errorHandling.handle(error: error)
+                        }
+                })
 
             } catch let error as APIErrors {
                 errorHandling.handle(error: error)
@@ -80,15 +101,18 @@ struct NasaList: View {
     private func getNasaItems(searchString: String){
         Task {
             do {
-                let service = DataService()
-                let collection = try await service.getNasaData(searchString: searchString)
-                setNewdata(collection: collection)
-
-            } catch let error as APIErrors {
-                errorHandling.handle(error: error)
-            }
-            catch let error {
-                errorHandling.handle(error: error)
+                let url = try service.constructURLFromComponents(searchValue: searchString)
+                service.getCollectionData(nextURL: url, completion: { inner in
+                    do {
+                        let collection = try inner()
+                        setNewdata(collection: collection)
+                    } catch let error as APIErrors {
+                        errorHandling.handle(error: error)
+                    }
+                    catch let error {
+                        errorHandling.handle(error: error)
+                    }
+                })
             }
         }
     }

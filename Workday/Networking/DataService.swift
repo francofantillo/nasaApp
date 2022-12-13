@@ -12,35 +12,42 @@ enum Endpoint: String {
 }
 
 protocol DataServiceProtocol {
-    func getNasaData(searchString: String) async throws -> NasaCollection
+    //func getNasaData(searchString: String) async throws -> NasaCollection
 }
 
 class DataService: DataServiceProtocol {
-    
-    func getNasaData(searchString: String) async throws -> NasaCollection {
-        
-        let components = constructURL(searchValue: searchString)
 
-        guard let url = components.url else {
+    let client: HttpClient
+    
+    init(client: HttpClient) {
+        self.client = client
+    }
+    
+    func getCollectionData(nextURL: URL, completion: @escaping (_ inner: () throws -> (NasaCollection)) -> ()) {
+        
+        client.getData(url: nextURL, result: { result in
+            
+            completion({
+                switch result {
+                case .success(let data):
+                    print(data.prettyPrintedJSONString)
+                    let collection = try JSONDecoder().decode(NasaCollection.self, from: data)
+                    return collection
+                case .failure(let error):
+                    throw APIErrors.validationError(error.localizedDescription)
+                }
+            })
+        })
+    }
+    
+    func constructURLFromString(urlString: String) throws -> URL {
+        guard let url = URL(string: urlString) else {
             throw APIErrors.invalidRequestError
         }
-
-        return try await getNextPage(nextURL: url)
+        return url
     }
-    
-    func getNextPage(nextURL: URL) async throws -> NasaCollection {
-        
-        let (data, response) = try await URLSession.shared.data(from: nextURL)
-        
-        try checkResponse(response: response, data: data)
-        print(data.prettyPrintedJSONString)
 
-        let collection = try JSONDecoder().decode(NasaCollection.self, from: data)
-
-        return collection
-    }
-    
-    private func constructURL(searchValue: String) -> URLComponents{
+    func constructURLFromComponents(searchValue: String) throws -> URL {
         
         var components = URLComponents()
         components.scheme = "https"
@@ -51,36 +58,11 @@ class DataService: DataServiceProtocol {
             URLQueryItem(name: "page", value: "1"),
             URLQueryItem(name: "media_type", value: "image")
         ]
-        return components
-    }
-    
-    func constructURLFromString(urlString: String) throws -> URL {
-        guard let url = URL(string: urlString) else {
+        guard let url = components.url else {
             throw APIErrors.invalidRequestError
         }
         return url
     }
     
-    private func checkResponse(response: URLResponse, data: Data) throws {
-        
-        guard let urlResponse = response as? HTTPURLResponse else {
-            throw APIErrors.invalidResponseError
-        }
 
-        if (200..<300) ~=  urlResponse.statusCode {
-            return
-        }
-        else {
-            let decoder = JSONDecoder()
-            let apiError = try decoder.decode(APIErrorMessage.self, from: data)
-
-            if (400..<499) ~=  urlResponse.statusCode {
-                throw APIErrors.validationError(apiError.reason)
-            }
-            
-            if 500 < urlResponse.statusCode {
-                throw APIErrors.validationError(apiError.reason)
-            }
-        }
-    }
 }

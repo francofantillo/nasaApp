@@ -17,7 +17,10 @@ class ErrorHandling: ObservableObject {
     @Published var currentAlert: ErrorAlert?
 
     func handle(error: Error) {
-        currentAlert = ErrorAlert(message: error.localizedDescription)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.currentAlert = ErrorAlert(message: error.localizedDescription)
+        }
     }
 }
 
