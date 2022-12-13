@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct APIErrorMessage: Decodable {
+struct APIErrorMessage: Codable {
   var error: Bool
   var reason: String
 }

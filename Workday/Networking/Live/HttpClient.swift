@@ -17,7 +17,6 @@ protocol URLSessionProtocol {
 protocol URLSessionDataTaskProtocol {
     func resume()
     func cancel()
-    
 }
 
 //MARK: HttpClient Implementation
@@ -77,6 +76,7 @@ class HttpClient {
         }
 
         if (200..<300) ~=  urlResponse.statusCode {
+            print(urlResponse.statusCode)
             guard let data = data else { return .failure(APIErrors.validationError("Unable to decode api error.")) }
             return .success(data)
         }
@@ -91,7 +91,7 @@ class HttpClient {
                     return .failure(APIErrors.validationError("Failed with status code:  \(urlResponse.statusCode).  Reason: \(apiError.reason)"))
                 }
                 
-                if 500 < urlResponse.statusCode {
+                if 500 <= urlResponse.statusCode {
                     return .failure(APIErrors.validationError("Failed with status code:  \(urlResponse.statusCode).  Reason: \(apiError.reason)"))
                 }
                 

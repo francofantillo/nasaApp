@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA208E1929433C460042AAB5 /* Lululemon_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA208E1829433C460042AAB5 /* Lululemon_DemoTests.swift */; };
 		BA208E1D294358410042AAB5 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA208E1C294358410042AAB5 /* HttpClient.swift */; };
+		BA208E21294803A60042AAB5 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA208E20294803A60042AAB5 /* MockURLSession.swift */; };
 		BA3C8144293B13FE00106EFC /* WorkdayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8143293B13FE00106EFC /* WorkdayApp.swift */; };
 		BA3C8146293B13FE00106EFC /* NasaList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8145293B13FE00106EFC /* NasaList.swift */; };
 		BA3C8148293B13FF00106EFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C8147293B13FF00106EFC /* Assets.xcassets */; };
@@ -52,8 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BA208E1829433C460042AAB5 /* Lululemon_DemoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lululemon_DemoTests.swift; sourceTree = "<group>"; };
 		BA208E1C294358410042AAB5 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		BA208E20294803A60042AAB5 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		BA3C8140293B13FE00106EFC /* Workday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C8143293B13FE00106EFC /* WorkdayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayApp.swift; sourceTree = "<group>"; };
 		BA3C8145293B13FE00106EFC /* NasaList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaList.swift; sourceTree = "<group>"; };
@@ -108,6 +108,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA208E1E294803720042AAB5 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				BAA74495293C889500CE4DD2 /* DataService.swift */,
+				BA208E1C294358410042AAB5 /* HttpClient.swift */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		BA208E1F2948037A0042AAB5 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				BA208E20294803A60042AAB5 /* MockURLSession.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		BA3C8137293B13FE00106EFC = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				BA3C8155293B13FF00106EFC /* WorkdayTests.swift */,
-				BA208E1829433C460042AAB5 /* Lululemon_DemoTests.swift */,
 			);
 			path = WorkdayTests;
 			sourceTree = "<group>";
@@ -183,8 +199,8 @@
 		BA3C8173293B273200106EFC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				BAA74495293C889500CE4DD2 /* DataService.swift */,
-				BA208E1C294358410042AAB5 /* HttpClient.swift */,
+				BA208E1E294803720042AAB5 /* Live */,
+				BA208E1F2948037A0042AAB5 /* Test */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -377,6 +393,7 @@
 				BAA7448B293C0C4A00CE4DD2 /* NasaData.swift in Sources */,
 				BA3C8144293B13FE00106EFC /* WorkdayApp.swift in Sources */,
 				BAA7449C293E079B00CE4DD2 /* NasaCell.swift in Sources */,
+				BA208E21294803A60042AAB5 /* MockURLSession.swift in Sources */,
 				BA208E1D294358410042AAB5 /* HttpClient.swift in Sources */,
 				BAA74487293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift in Sources */,
 				BAA7449A293DF0EB00CE4DD2 /* SearchBar.swift in Sources */,
@@ -395,7 +412,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA208E1929433C460042AAB5 /* Lululemon_DemoTests.swift in Sources */,
 				BA3C8156293B13FF00106EFC /* WorkdayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
