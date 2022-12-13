@@ -7,7 +7,7 @@
 
 import Foundation
 
-// Protocol for MOCK/Real
+//MARK: Protocol for MOCK/Real
 protocol URLSessionProtocol {
     typealias DataTaskResult = (Data?, URLResponse?, Error?) -> Void
     

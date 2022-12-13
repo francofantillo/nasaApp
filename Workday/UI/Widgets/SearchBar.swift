@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 import Foundation
 
 struct SearchBar: View {
