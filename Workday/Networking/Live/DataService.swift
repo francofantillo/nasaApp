@@ -23,21 +23,12 @@ class DataService: DataServiceProtocol {
         self.client = client
     }
     
-    func getCollectionData(nextURL: URL, completion: @escaping (_ inner: () throws -> (NasaCollection)) -> ()) {
+    func getCollectionData(nextURL: URL) async throws -> NasaCollection {
         
-        client.getData(url: nextURL, result: { result in
-            
-            completion({
-                switch result {
-                case .success(let data):
-                    print(data.prettyPrintedJSONString)
-                    let collection = try JSONDecoder().decode(NasaCollection.self, from: data)
-                    return collection
-                case .failure(let error):
-                    throw APIErrors.validationError(error.localizedDescription)
-                }
-            })
-        })
+        let data = try await client.getData(url: nextURL)
+        //print(data.prettyPrintedJSONString)
+        let collection = try JSONDecoder().decode(NasaCollection.self, from: data)
+        return collection
     }
     
     func constructURLFromString(urlString: String) throws -> URL {

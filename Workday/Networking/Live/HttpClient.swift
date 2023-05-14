@@ -32,41 +32,44 @@ class HttpClient {
         self.session = session
     }
     
-    func getData(url: URL, result: @escaping (Result<Data, APIErrors>) ->Void){
-        
-        // Check if another task is running and cancel it if it is
-        if let task = dataTask {
-            task.cancel()
-        }
+    func getData(url: URL) async throws -> Data {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        dataTask = session.dataTask(with: request) { [weak self] (data, response, error) in
-            
-            guard let self = self else {
-                result(.failure(APIErrors.validationError("Self is out of scope.")))
-                return
-            }
-            
-            if let error = error {
-                if error.localizedDescription == "cancelled" {
-                    return
+        
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                dataTask = session.dataTask(with: request) { [weak self] (data, response, error) in
+                    
+                    guard let self1 = self else {
+                        continuation.resume(with: .failure(APIErrors.validationError("Self is out of scope.")))
+                        return
+                    }
+                    
+                    if let error = error {
+                        if error.localizedDescription == "cancelled" {
+                            return
+                        }
+                        continuation.resume(with: .failure(APIErrors.transportError("Http get failed.")))
+                        return
+                    }
+                    
+                    switch self1.checkResponse(response: response, data: data){
+                    case .failure(let error):
+                        continuation.resume(with: .failure(error))
+                        return
+                    case .success(let data):
+                        continuation.resume(with: .success(data))
+                        return
+                    }
+                    
                 }
-                result(.failure(APIErrors.transportError("Http get failed.")))
-                return
+                dataTask.resume()
             }
             
-            switch self.checkResponse(response: response, data: data){
-                case .failure(let error):
-                    result(.failure(error))
-                    return
-                case .success(let data):
-                    result(.success(data))
-                    return
-            }
-            
+        } onCancel: {
+            dataTask.cancel()
         }
-        dataTask.resume()
     }
     
     private func checkResponse(response: URLResponse?, data: Data?) -> Result<Data, APIErrors> {

@@ -9,85 +9,35 @@ import SwiftUI
 
 struct NasaList: View {
     
+    @StateObject private var viewModel: NasaListViewModel = NasaListViewModel()
     @EnvironmentObject private var errorHandling: ErrorHandling
-    @StateObject var nasaItems = NasaItems(items: [])
     @FocusState var focus
-    @State var searchString = ""
-    @State var nextPageLink: String = ""
-    let service = DataService(client: HttpClient(session: URLSession.shared))
     
     var searchStringBinding: Binding<String> { Binding (
 
         get: {
-            return self.searchString
+            return self.viewModel.searchString
         },
 
         set: {
             guard $0 != "" else {
-                nasaItems.items = []
-                self.searchString = $0
-                nextPageLink = ""
+                viewModel.items = []
+                self.viewModel.searchString = $0
+                viewModel.nextPageLink = ""
                 return
             }
-            guard self.searchString != $0 else { return }
-            self.searchString = $0
-            nextPageLink = ""
-            self.getNasaItems(searchString: $0)
+            guard self.viewModel.searchString != $0 else { return }
+            self.viewModel.searchString = $0
+            viewModel.nextPageLink = ""
+            getNasaItems(text: $0)
+            
         })
     }
     
-    private func appendNewData(collection: NasaCollection){
-        DispatchQueue.main.async {
-            nasaItems.items.append(contentsOf: collection.items)
-            handleNextLinks(collection: collection)
-        }
-    }
-    
-    private func setNewdata(collection: NasaCollection){
-        DispatchQueue.main.async {
-            nasaItems.items = collection.items
-            handleNextLinks(collection: collection)
-        }
-    }
-    
-    private func handleNextLinks(collection: NasaCollection){
-        
-        guard let links = collection.links else { return }
-        
-        guard !links.isEmpty else {
-            nextPageLink = ""
-            return
-        }
-        
-        for link in links {
-            if link.rel == "next" {
-                nextPageLink = link.href
-                nextPageLink = nextPageLink.replace(target: "http", withString:"https")
-            }
-            if link.rel == "prev" && links.count == 1 {
-                nextPageLink = ""
-            }
-        }
-    }
-    
-    private func getNextPage(){
+    private func getNasaItems(text: String){
         Task {
             do {
-
-                guard nextPageLink != "" else { return }
-                let url = try service.constructURLFromString(urlString: nextPageLink)
-                service.getCollectionData(nextURL: url, completion: { inner in
-                        do {
-                            let collection = try inner()
-                            appendNewData(collection: collection)
-                        } catch let error as APIErrors {
-                            errorHandling.handle(error: error)
-                        }
-                        catch let error {
-                            errorHandling.handle(error: error)
-                        }
-                })
-
+                try await self.viewModel.getNasaItems(searchString: text)
             } catch let error as APIErrors {
                 errorHandling.handle(error: error)
             }
@@ -97,52 +47,40 @@ struct NasaList: View {
         }
     }
     
-    private func getNasaItems(searchString: String){
+    private func getNextPage() {
         Task {
             do {
-                let url = try service.constructURLFromComponents(searchValue: searchString)
-                service.getCollectionData(nextURL: url, completion: { inner in
-                    do {
-                        let collection = try inner()
-                        setNewdata(collection: collection)
-                    } catch let error as APIErrors {
-                        errorHandling.handle(error: error)
-                    }
-                    catch let error {
-                        errorHandling.handle(error: error)
-                    }
-                })
+                try await viewModel.getNextPage()
+            } catch let error as APIErrors {
+                errorHandling.handle(error: error)
+            }
+            catch let error {
+                errorHandling.handle(error: error)
             }
         }
     }
-    
 
-    
     var body: some View {
         VStack {
             
             SearchBar(text: searchStringBinding, focusBinding: $focus, onEditMethod: nil)
                 .padding(22)
-            if !nasaItems.items.isEmpty {
+            if !viewModel.items.isEmpty {
                 List {
-                    ForEach(nasaItems.items) { item in
+                    ForEach(viewModel.items) { item in
                         
-                        if let data = item.data {
-                            
-                            //if !data.isEmpty {
-                                NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "", imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ))
-                                
-                                    .padding([.leading, .trailing],-16)
-                                    .listRowBackground(Color.clear)
-                                    .listRowSeparator(.hidden)
-                                    .buttonStyle(PlainButtonStyle())
-                                    .onAppear(){
-                                        if nasaItems.items.last == item {
-                                            getNextPage()
-                                        }
-                                    }
-                            //}
-                        }
+                        let data = item.data
+                        NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "", imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ))
+                        
+                            .padding([.leading, .trailing],-16)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .buttonStyle(PlainButtonStyle())
+                            .onAppear(){
+                                if viewModel.items.last == item {
+                                    getNextPage()
+                                }
+                            }
                     }
                 }
                 .scrollContentBackground(.hidden)
