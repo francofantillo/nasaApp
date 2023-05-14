@@ -14,6 +14,7 @@ enum MockURLSessionTestCase: Int {
     case fail400 = 1
     case fail500 = 2
     case caseNil = 3
+    case lengthyTask = 4
 }
 
 class MockURLSession: URLSessionProtocol {
@@ -33,6 +34,11 @@ class MockURLSession: URLSessionProtocol {
     private (set) var lastURL: URL?
     
     func successHttpURLResponse(request: URLRequest) -> URLResponse {
+        return HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: nil)!
+    }
+    
+    func successLengthyHttpURLResponse(request: URLRequest) -> URLResponse {
+        do { sleep(4) }
         return HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: nil)!
     }
     
@@ -57,6 +63,8 @@ class MockURLSession: URLSessionProtocol {
             response = failHttpURLResponse500(request: request)
         case .caseNil:
             response = nil
+        case .lengthyTask:
+            response = successLengthyHttpURLResponse(request: request)
         }
         
         completionHandler(nextData, response, nextError)
@@ -67,13 +75,8 @@ class MockURLSession: URLSessionProtocol {
 class MockURLSessionDataTask: URLSessionDataTaskProtocol {
     
     private (set) var resumeWasCalled = false
-    private (set) var cancelWasCalled = false
     
     func resume() {
         resumeWasCalled = true
-    }
-    
-    func cancel() {
-        cancelWasCalled = true
     }
 }

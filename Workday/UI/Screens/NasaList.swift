@@ -34,7 +34,8 @@ struct NasaList: View {
     }
     
     private func getNasaItems(text: String){
-        Task {
+        viewModel.cancelTask()
+        viewModel.nasaTask = Task {
             do {
                 try await self.viewModel.getNasaItems(searchString: text)
             } catch let error as APIErrors {
@@ -47,7 +48,8 @@ struct NasaList: View {
     }
     
     private func getNextPage() {
-        Task {
+        viewModel.cancelTask()
+        viewModel.nasaTask = Task {
             do {
                 try await viewModel.getNextPage()
             } catch let error as APIErrors {

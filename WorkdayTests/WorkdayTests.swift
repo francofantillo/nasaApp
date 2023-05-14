@@ -34,21 +34,25 @@ final class WorkdayTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_get_request_with_URL() {
+    func test_get_request_with_URL() async {
 
+        let expectedData = "{}".data(using: .utf8)
+        sessionSuccess.nextData = expectedData
+        
         guard let url = URL(string: "https://mockurl") else {
             fatalError("URL can't be empty")
         }
         
-        httpClientSuccess.getData(url: url) { (result) in
-            // Return data
-        }
+        _ = try! await httpClientSuccess.getData(url: url)
         
         XCTAssert(sessionSuccess.lastURL == url)
         
     }
     
-    func test_get_resume_called() {
+    func test_get_resume_called() async {
+        
+        let expectedData = "{}".data(using: .utf8)
+        sessionSuccess.nextData = expectedData
         
         let dataTask = MockURLSessionDataTask()
         sessionSuccess.nextDataTask = dataTask
@@ -57,51 +61,20 @@ final class WorkdayTests: XCTestCase {
             fatalError("URL can't be empty")
         }
         
-        httpClientSuccess.getData(url: url) { (result) in
-            // Return data
-        }
+        _ = try! await httpClientSuccess.getData(url: url)
         
         XCTAssert(dataTask.resumeWasCalled)
     }
     
-    func test_get_cancel_called() {
-        
-        let dataTask = MockURLSessionDataTask()
-        sessionSuccess.nextDataTask = dataTask
-        
-        guard let url = URL(string: "https://mockurl") else {
-            fatalError("URL can't be empty")
-        }
-        
-        httpClientSuccess.getData(url: url) { (result) in
-            // Return data
-        }
-        httpClientSuccess.getData(url: url) { (result) in
-            // Return data
-        }
-        
-        XCTAssert(dataTask.cancelWasCalled)
-    }
-    
-    func test_get_should_return_data() {
+    func test_get_should_return_data() async {
         let expectedData = "{}".data(using: .utf8)
         
         sessionSuccess.nextData = expectedData
-        
-        var actualData: Data?
-        httpClientSuccess.getData(url: URL(string: "http://mockurl")!) { (result) in
-            switch result {
-            case .success(let data):
-                actualData = data
-            case .failure(_):
-                fatalError("This should not fail.")
-            }
-        }
-        
-        XCTAssertNotNil(actualData)
+        let data = try! await httpClientSuccess.getData(url: URL(string: "http://mockurl")!)
+        XCTAssertNotNil(data)
     }
     
-    func test_get_should_return_apiError400() {
+    func test_get_should_return_apiError400() async {
     
         let errorData = APIErrorMessage(error: true, reason: "Test Error")
         let encoder = JSONEncoder()
@@ -109,20 +82,19 @@ final class WorkdayTests: XCTestCase {
         
         sessionFail400.nextData = encoded
         
-        var testError: Error?
-        httpClientFail400.getData(url: URL(string: "http://mockurl")!) { (result) in
-            switch result {
-            case .success(_):
-                fatalError("This should not succeed.")
-            case .failure(let error):
-                testError = error
-            }
+        do {
+            _ = try await httpClientFail400.getData(url: URL(string: "http://mockurl")!)
+            fatalError("Should produce an error.")
+            
+        } catch let error as APIErrors {
+            XCTAssertNotNil(error)
         }
-
-        XCTAssertNotNil(testError)
+        catch {
+            fatalError("Should catch specific error.")
+        }
     }
     
-    func test_get_should_return_apiError500() {
+    func test_get_should_return_apiError500() async {
     
         let errorData = APIErrorMessage(error: true, reason: "Test Error")
         let encoder = JSONEncoder()
@@ -130,67 +102,62 @@ final class WorkdayTests: XCTestCase {
         
         sessionFail500.nextData = encoded
         
-        var testError: Error?
-        httpClientFail500.getData(url: URL(string: "http://mockurl")!) { (result) in
-            switch result {
-            case .success(_):
-                fatalError("This should not succeed.")
-            case .failure(let error):
-                testError = error
-            }
+        do {
+            _ = try await httpClientFail500.getData(url: URL(string: "http://mockurl")!)
+            fatalError("Should produce an error.")
+            
+        } catch let error as APIErrors {
+            XCTAssertNotNil(error)
         }
-
-        XCTAssertNotNil(testError)
+        catch {
+            fatalError("Should catch specific error.")
+        }
     }
     
-    func test_get_should_return_error() {
+    func test_get_should_return_error() async {
         let expectedData = "{}".data(using: .utf8)
 
         sessionFail400.nextData = expectedData
         
-        var testError: Error?
-        httpClientFail400.getData(url: URL(string: "http://mockurl")!) { (result) in
-            switch result {
-            case .success(_):
-                fatalError("This should not succeed.")
-            case .failure(let error):
-                testError = error
-            }
+        do {
+            _ = try await httpClientFail400.getData(url: URL(string: "http://mockurl")!)
+            fatalError("Should produce an error.")
+            
+        } catch let error as APIErrors {
+            XCTAssertNotNil(error)
         }
-
-        XCTAssertNotNil(testError)
+        catch {
+            fatalError("Should catch specific error.")
+        }
     }
     
-    func test_with_url_response_nil() {
+    func test_with_url_response_nil() async {
         
-        var testError: Error?
-        httpClientNilResponse.getData(url: URL(string: "http://mockurl")!) { (result) in
-            switch result {
-            case .success(_):
-                fatalError("This should not succeed.")
-            case .failure(let error):
-                testError = error
-            }
+        do {
+            _ = try await httpClientNilResponse.getData(url: URL(string: "http://mockurl")!)
+            fatalError("Should produce an error.")
+            
+        } catch let error as APIErrors {
+            XCTAssertNotNil(error)
         }
-
-        XCTAssertNotNil(testError)
+        catch {
+            fatalError("Should catch specific error.")
+        }
     }
     
-    func test_session_transport_error() {
+    func test_session_transport_error() async {
         
         sessionFail400.nextError = APIErrors.invalidResponseError
         
-        var testError: Error?
-        httpClientFail400.getData(url: URL(string: "http://mockurl")!) { (result) in
-            switch result {
-            case .success(_):
-                fatalError("This should not succeed.")
-            case .failure(let error):
-                testError = error
-            }
+        do {
+            _ = try await httpClientFail400.getData(url: URL(string: "http://mockurl")!)
+            fatalError("Should produce an error.")
+        } catch let error as APIErrors {
+            XCTAssertNotNil(error)
         }
-
-        XCTAssertNotNil(testError)
+        catch {
+            fatalError("Should catch specific error.")
+        }
     }
 }
 

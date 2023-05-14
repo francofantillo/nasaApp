@@ -16,7 +16,6 @@ protocol URLSessionProtocol {
 
 protocol URLSessionDataTaskProtocol {
     func resume()
-    func cancel()
 }
 
 //MARK: HttpClient Implementation
@@ -37,8 +36,7 @@ class HttpClient {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        return try await withTaskCancellationHandler {
-            try await withCheckedThrowingContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
                 dataTask = session.dataTask(with: request) { [weak self] (data, response, error) in
                     
                     guard let self1 = self else {
@@ -66,10 +64,6 @@ class HttpClient {
                 }
                 dataTask.resume()
             }
-            
-        } onCancel: {
-            dataTask.cancel()
-        }
     }
     
     private func checkResponse(response: URLResponse?, data: Data?) -> Result<Data, APIErrors> {

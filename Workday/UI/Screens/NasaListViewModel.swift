@@ -15,6 +15,13 @@ extension NasaList {
         @Published var searchString = ""
         @Published var nextPageLink: String = ""
         let service = DataService(client: HttpClient(session: URLSession.shared))
+        var nasaTask: Task<Void, Error>?
+        
+        func cancelTask() {
+            guard nasaTask != nil else { return }
+            nasaTask?.cancel()
+            nasaTask = nil
+        }
         
         private func appendNewData(collection: NasaCollection){
             DispatchQueue.main.async { [weak self] in
