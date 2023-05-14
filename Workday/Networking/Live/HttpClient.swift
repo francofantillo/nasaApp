@@ -48,19 +48,19 @@ class HttpClient {
                     
                     if let error = error {
                         if error.localizedDescription == "cancelled" {
-                            return
+                            return // We dont need to alert the user of this.
                         }
-                        continuation.resume(with: .failure(APIErrors.transportError("Http get failed.")))
+                        continuation.resume(with: .failure(APIErrors.invalidRequestError))
                         return
                     }
                     
                     switch self1.checkResponse(response: response, data: data){
-                    case .failure(let error):
-                        continuation.resume(with: .failure(error))
-                        return
-                    case .success(let data):
-                        continuation.resume(with: .success(data))
-                        return
+                        case .failure(let error):
+                            continuation.resume(with: .failure(error))
+                            return
+                        case .success(let data):
+                            continuation.resume(with: .success(data))
+                            return
                     }
                     
                 }
@@ -91,11 +91,11 @@ class HttpClient {
                 let apiError = try decoder.decode(APIErrorMessage.self, from: data)
                 
                 if (400..<499) ~=  urlResponse.statusCode {
-                    return .failure(APIErrors.validationError("Failed with status code:  \(urlResponse.statusCode).  Reason: \(apiError.reason)"))
+                    return .failure(APIErrors.transportError("Failed with status code:  \(urlResponse.statusCode).  Reason: \(apiError.reason)"))
                 }
                 
                 if 500 <= urlResponse.statusCode {
-                    return .failure(APIErrors.validationError("Failed with status code:  \(urlResponse.statusCode).  Reason: \(apiError.reason)"))
+                    return .failure(APIErrors.transportError("Failed with status code:  \(urlResponse.statusCode).  Reason: \(apiError.reason)"))
                 }
                 
             } catch {

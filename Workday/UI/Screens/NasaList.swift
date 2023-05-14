@@ -38,7 +38,7 @@ struct NasaList: View {
             do {
                 try await self.viewModel.getNasaItems(searchString: text)
             } catch let error as APIErrors {
-                errorHandling.handle(error: error)
+                errorHandling.handleApiError(error: error)
             }
             catch let error {
                 errorHandling.handle(error: error)
@@ -51,7 +51,7 @@ struct NasaList: View {
             do {
                 try await viewModel.getNextPage()
             } catch let error as APIErrors {
-                errorHandling.handle(error: error)
+                errorHandling.handleApiError(error: error)
             }
             catch let error {
                 errorHandling.handle(error: error)

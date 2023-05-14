@@ -14,8 +14,16 @@ struct ErrorAlert: Identifiable {
 }
 
 class ErrorHandling: ObservableObject {
+    
     @Published var currentAlert: ErrorAlert?
 
+    func handleApiError(error: APIErrors) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.currentAlert = ErrorAlert(message: error.errorDescription ?? "Unknown error.")
+        }
+    }
+    
     func handle(error: Error) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
