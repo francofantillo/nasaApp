@@ -12,12 +12,10 @@ struct SearchBar: View {
     
     @State private var isEditing = false
     @Binding var text: String
-    private var searchIsFocused: FocusState<Bool>.Binding
     private var onEditMethod: (() -> Void)?
     
-    init(text: Binding<String>, focusBinding: FocusState<Bool>.Binding, onEditMethod: (() -> Void)?) {
+    init(text: Binding<String>, onEditMethod: (() -> Void)?) {
         self._text = text
-        self.searchIsFocused = focusBinding
         self.onEditMethod = onEditMethod
     }
  
@@ -32,7 +30,6 @@ struct SearchBar: View {
                 Text("Search ...").foregroundColor(Color(UIColor.gray.cgColor))
             })
             .submitLabel(.done)
-            .focused(searchIsFocused)
             .padding(7)
             .padding(.horizontal, 25)
             .foregroundColor(Color("DarkGray"))

@@ -10,6 +10,7 @@ import SwiftUI
 struct NasaCell: View {
     
     var vm: NasaCellViewModel
+    let config = UIConfig()
     
     init(vm: NasaCellViewModel) {
         self.vm = vm
@@ -35,8 +36,8 @@ struct NasaCell: View {
                         default: ProgressView()
                         }
                     }
-                    .frame(width: 50, height: 50)
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                    .frame(width: config.cellImageWidth, height: config.cellImageWidth)
+                    .clipShape(RoundedRectangle(cornerRadius: config.cellImageWidth/2))
                     .padding(.trailing)
                     
                     Text(vm.title)
@@ -46,7 +47,7 @@ struct NasaCell: View {
                 }
                 
                 Rectangle()
-                    .frame(height: 2, alignment: .center)
+                    .frame(height: config.dividerHeight, alignment: .center)
                     .foregroundColor(Color.black)
                 
                 HStack {
@@ -58,7 +59,7 @@ struct NasaCell: View {
             }
             .padding()
             .background(Color("LightGray"))
-            .cornerRadius(10)
+            .cornerRadius(config.cardCornerRadius)
             
         }
     }

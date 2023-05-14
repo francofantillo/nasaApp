@@ -11,14 +11,15 @@ struct DetailScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     @StateObject var vm: DetailScreenViewModel
+    let config = UIConfig()
     
     var body: some View {
         VStack {
             ScrollView{
                 
                 Text(vm.title)
-                    .font(.system(size: 30))
-                    .padding(.bottom, 25)
+                    .font(.system(size: config.titleFontSize))
+                    .padding(.bottom, config.titlePadding)
                 
                 AsyncImage(url: URL(string: vm.imageURL)) { phase in
                     switch phase {
@@ -32,8 +33,8 @@ struct DetailScreen: View {
                     default: ProgressView()
                     }
                 }
-                .frame(width: 250, height: 250)
-                .clipShape(RoundedRectangle(cornerRadius: 125))
+                .frame(width: config.imageWidth, height: config.imageWidth)
+                .clipShape(RoundedRectangle(cornerRadius: config.imageWidth/2))
                 .padding([.bottom])
                 
                 HStack {
@@ -41,7 +42,7 @@ struct DetailScreen: View {
                     Text(vm.date)
                     Spacer()
                 }
-                .padding(.bottom, 4)
+                .padding(.bottom, config.textPadding)
                 HStack {
                     Text("Description:  " + vm.description )
                         .multilineTextAlignment(.leading)
@@ -52,9 +53,9 @@ struct DetailScreen: View {
             }
             .padding()
             .background(Color.white)
-            .cornerRadius(16)
+            .cornerRadius(config.cardCornerRadius)
         }
-        .padding(16)
+        .padding(config.padding)
         .background(Color("Primary"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Details")
@@ -64,7 +65,7 @@ struct DetailScreen: View {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 HStack {
-                    Spacer(minLength: 14)
+                    Spacer(minLength: config.padding)
                     Image(systemName: "arrow.left")
                         .foregroundColor(.white)
                 }

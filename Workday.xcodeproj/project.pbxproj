@@ -33,6 +33,7 @@
 		BAA744A92940BA9C00CE4DD2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA744A82940BA9C00CE4DD2 /* Router.swift */; };
 		BAA744AB2940BBE200CE4DD2 /* DetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA744AA2940BBE200CE4DD2 /* DetailScreenViewModel.swift */; };
 		BAD105942A10A16F00D78F68 /* NasaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD105932A10A16F00D78F68 /* NasaListViewModel.swift */; };
+		BAD105972A11724B00D78F68 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD105962A11724B00D78F68 /* UIConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		BAA744A82940BA9C00CE4DD2 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BAA744AA2940BBE200CE4DD2 /* DetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenViewModel.swift; sourceTree = "<group>"; };
 		BAD105932A10A16F00D78F68 /* NasaListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaListViewModel.swift; sourceTree = "<group>"; };
+		BAD105962A11724B00D78F68 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				BAA7449D2940271600CE4DD2 /* Cells */,
+				BAD105952A11722900D78F68 /* Formatting */,
 				BAA744A32940B8B300CE4DD2 /* Screens */,
 				BAA744A229403F5F00CE4DD2 /* Widgets */,
 			);
@@ -256,6 +259,14 @@
 				BAA744AA2940BBE200CE4DD2 /* DetailScreenViewModel.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		BAD105952A11722900D78F68 /* Formatting */ = {
+			isa = PBXGroup;
+			children = (
+				BAD105962A11724B00D78F68 /* UIConfig.swift */,
+			);
+			path = Formatting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +408,7 @@
 				BAA7448B293C0C4A00CE4DD2 /* NasaData.swift in Sources */,
 				BA3C8144293B13FE00106EFC /* WorkdayApp.swift in Sources */,
 				BAA7449C293E079B00CE4DD2 /* NasaCell.swift in Sources */,
+				BAD105972A11724B00D78F68 /* UIConfig.swift in Sources */,
 				BA208E21294803A60042AAB5 /* MockURLSession.swift in Sources */,
 				BA208E1D294358410042AAB5 /* HttpClient.swift in Sources */,
 				BAA74487293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift in Sources */,

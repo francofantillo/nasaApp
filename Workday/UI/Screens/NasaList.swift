@@ -11,7 +11,7 @@ struct NasaList: View {
     
     @StateObject private var viewModel: NasaListViewModel = NasaListViewModel()
     @EnvironmentObject private var errorHandling: ErrorHandling
-    @FocusState var focus
+    let config = UIConfig()
     
     var searchStringBinding: Binding<String> { Binding (
 
@@ -30,7 +30,6 @@ struct NasaList: View {
             self.viewModel.searchString = $0
             viewModel.nextPageLink = ""
             getNasaItems(text: $0)
-            
         })
     }
     
@@ -63,8 +62,8 @@ struct NasaList: View {
     var body: some View {
         VStack {
             
-            SearchBar(text: searchStringBinding, focusBinding: $focus, onEditMethod: nil)
-                .padding(22)
+            SearchBar(text: searchStringBinding, onEditMethod: nil)
+                .padding(config.searchBarPadding)
             if !viewModel.items.isEmpty {
                 List {
                     ForEach(viewModel.items) { item in
@@ -72,7 +71,7 @@ struct NasaList: View {
                         let data = item.data
                         NasaCell(vm: NasaCell.NasaCellViewModel(title: data[0].title ?? "", imageURL: item.links[0].href, description: data[0].description ?? "", dateCreated:   data[0].date_created ))
                         
-                            .padding([.leading, .trailing],-16)
+                            .padding([.leading, .trailing],-config.padding)
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .buttonStyle(PlainButtonStyle())
