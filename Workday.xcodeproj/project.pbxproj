@@ -14,8 +14,6 @@
 		BA3C8148293B13FF00106EFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C8147293B13FF00106EFC /* Assets.xcassets */; };
 		BA3C814C293B13FF00106EFC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C814B293B13FF00106EFC /* Preview Assets.xcassets */; };
 		BA3C8156293B13FF00106EFC /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8155293B13FF00106EFC /* NetworkTests.swift */; };
-		BA3C8160293B13FF00106EFC /* WorkdayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */; };
-		BA3C8162293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */; };
 		BA3C8171293B271E00106EFC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8170293B271E00106EFC /* Extensions.swift */; };
 		BA6139F12A12BEBD00FFD215 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA6139F02A12BEBD00FFD215 /* README.md */; };
 		BAA74487293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */; };
@@ -67,8 +65,6 @@
 		BA3C8151293B13FF00106EFC /* WorkdayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkdayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C8155293B13FF00106EFC /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		BA3C815B293B13FF00106EFC /* WorkdayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkdayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayUITests.swift; sourceTree = "<group>"; };
-		BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BA3C8170293B271E00106EFC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA6139F02A12BEBD00FFD215 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlingViewModifier.swift; sourceTree = "<group>"; };
@@ -139,7 +135,6 @@
 				BA6139F02A12BEBD00FFD215 /* README.md */,
 				BA3C8142293B13FE00106EFC /* Workday */,
 				BA3C8154293B13FF00106EFC /* WorkdayTests */,
-				BA3C815E293B13FF00106EFC /* WorkdayUITests */,
 				BA3C8141293B13FE00106EFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -184,15 +179,6 @@
 				BAD105982A1292A400D78F68 /* ViewModelTests.swift */,
 			);
 			path = WorkdayTests;
-			sourceTree = "<group>";
-		};
-		BA3C815E293B13FF00106EFC /* WorkdayUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */,
-				BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */,
-			);
-			path = WorkdayUITests;
 			sourceTree = "<group>";
 		};
 		BA3C8172293B272600106EFC /* Utility */ = {
@@ -444,8 +430,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA3C8162293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift in Sources */,
-				BA3C8160293B13FF00106EFC /* WorkdayUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
