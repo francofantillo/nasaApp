@@ -17,6 +17,7 @@
 		BA3C8160293B13FF00106EFC /* WorkdayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */; };
 		BA3C8162293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */; };
 		BA3C8171293B271E00106EFC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3C8170293B271E00106EFC /* Extensions.swift */; };
+		BA6139F12A12BEBD00FFD215 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA6139F02A12BEBD00FFD215 /* README.md */; };
 		BAA74487293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */; };
 		BAA74489293BEB5900CE4DD2 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA74488293BEB5900CE4DD2 /* Errors.swift */; };
 		BAA7448B293C0C4A00CE4DD2 /* NasaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA7448A293C0C4A00CE4DD2 /* NasaData.swift */; };
@@ -69,6 +70,7 @@
 		BA3C815F293B13FF00106EFC /* WorkdayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayUITests.swift; sourceTree = "<group>"; };
 		BA3C8161293B13FF00106EFC /* WorkdayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BA3C8170293B271E00106EFC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BA6139F02A12BEBD00FFD215 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlingViewModifier.swift; sourceTree = "<group>"; };
 		BAA74488293BEB5900CE4DD2 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		BAA7448A293C0C4A00CE4DD2 /* NasaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaData.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		BA3C8137293B13FE00106EFC = {
 			isa = PBXGroup;
 			children = (
+				BA6139F02A12BEBD00FFD215 /* README.md */,
 				BA3C8142293B13FE00106EFC /* Workday */,
 				BA3C8154293B13FF00106EFC /* WorkdayTests */,
 				BA3C815E293B13FF00106EFC /* WorkdayUITests */,
@@ -376,6 +379,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6139F12A12BEBD00FFD215 /* README.md in Resources */,
 				BA3C814C293B13FF00106EFC /* Preview Assets.xcassets in Resources */,
 				BA3C8148293B13FF00106EFC /* Assets.xcassets in Resources */,
 			);
