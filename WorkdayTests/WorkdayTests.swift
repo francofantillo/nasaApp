@@ -2,7 +2,7 @@
 //  WorkdayTests.swift
 //  WorkdayTests
 //
-//  Created by Franco Fantillo on 2022-12-02.
+//  Created by Franco Fantillo
 //
 
 import XCTest

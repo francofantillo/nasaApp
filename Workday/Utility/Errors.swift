@@ -2,7 +2,7 @@
 //  Errors.swift
 //  Invoicer
 //
-//  Created by Franco Fantillo on 2022-09-07.
+//  Created by Franco Fantillo 
 //
 
 import Foundation

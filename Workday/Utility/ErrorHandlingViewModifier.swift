@@ -2,7 +2,7 @@
 //  ErrorHandlingViewModifier.swift
 //  Invoicer
 //
-//  Created by Franco Fantillo on 2022-09-30.
+//  Created by Franco Fantillo
 //
 
 import SwiftUI

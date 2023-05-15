@@ -2,7 +2,7 @@
 //  InvoiceCellViewModel.swift
 //  Invoicer
 //
-//  Created by Franco Fantillo on 2022-11-14.
+//  Created by Franco Fantillo 
 //
 
 import Foundation

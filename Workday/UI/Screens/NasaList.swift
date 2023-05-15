@@ -2,14 +2,14 @@
 //  ContentView.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2022-12-02.
+//  Created by Franco Fantillo 
 //
 
 import SwiftUI
 
 struct NasaList: View {
     
-    @StateObject private var viewModel: NasaListViewModel = NasaListViewModel()
+    @StateObject private var viewModel: NasaListViewModel = NasaListViewModel(service: DataService(client: HttpClient(session: URLSession.shared)))
     @EnvironmentObject private var errorHandling: ErrorHandling
     let config = UIConfig()
     

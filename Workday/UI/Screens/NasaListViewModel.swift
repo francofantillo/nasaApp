@@ -2,7 +2,7 @@
 //  NasaListViewModel.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2023-05-13.
+//  Created by Franco Fantillo 
 //
 
 import Foundation
@@ -14,8 +14,12 @@ extension NasaList {
         @Published var items: [NasaItem] = [NasaItem]()
         @Published var searchString = ""
         @Published var nextPageLink: String = ""
-        let service = DataService(client: HttpClient(session: URLSession.shared))
+        let service: DataService
         var nasaTask: Task<Void, Error>?
+        
+        init(service: DataService) {
+            self.service = service
+        }
         
         func cancelTask() {
             guard nasaTask != nil else { return }
@@ -23,17 +27,32 @@ extension NasaList {
             nasaTask = nil
         }
         
+        func getNextPage() async throws {
+
+            guard nextPageLink != "" else { return }
+            let url = try service.constructURLFromString(urlString: nextPageLink)
+            let collection = try await service.getCollectionData(nextURL: url)
+            appendNewData(collection: collection)
+        }
+        
         private func appendNewData(collection: NasaCollection){
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            DispatchQueue.main.async {
+                //guard let self = self else { return }
                 self.items.append(contentsOf: collection.items)
                 self.handleNextLinks(collection: collection)
             }
         }
         
+        func getNasaItems(searchString: String) async throws {
+            
+            let url = try service.constructURLFromComponents(searchValue: searchString)
+            let collection = try await service.getCollectionData(nextURL: url)
+            setNewdata(collection: collection)
+        }
+        
         private func setNewdata(collection: NasaCollection){
-            DispatchQueue.main.async  { [weak self] in
-                guard let self = self else { return }
+            DispatchQueue.main.async  {
+                //guard let self = self else { return }
                 self.items = collection.items
                 self.handleNextLinks(collection: collection)
             }
@@ -57,21 +76,6 @@ extension NasaList {
                     nextPageLink = ""
                 }
             }
-        }
-        
-        func getNextPage() async throws {
-
-            guard nextPageLink != "" else { return }
-            let url = try service.constructURLFromString(urlString: nextPageLink)
-            let collection = try await service.getCollectionData(nextURL: url)
-            appendNewData(collection: collection)
-        }
-        
-        func getNasaItems(searchString: String) async throws {
-            
-            let url = try service.constructURLFromComponents(searchValue: searchString)
-            let collection = try await service.getCollectionData(nextURL: url)
-            setNewdata(collection: collection)
         }
     }
 }

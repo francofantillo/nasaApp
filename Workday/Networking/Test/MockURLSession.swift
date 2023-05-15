@@ -2,7 +2,7 @@
 //  MockURLSession.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2022-12-13.
+//  Created by Franco Fantillo 
 //
 
 import Foundation

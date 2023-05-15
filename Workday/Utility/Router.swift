@@ -2,7 +2,7 @@
 //  Router.swift
 //  Invoicer
 //
-//  Created by Franco Fantillo on 2022-10-17.
+//  Created by Franco Fantillo
 //
 
 import SwiftUI

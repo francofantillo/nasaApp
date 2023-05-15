@@ -2,12 +2,12 @@
 //  NasaCollection.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2022-12-03.
+//  Created by Franco Fantillo
 //
 
 import Foundation
 
-struct NasaCollection: Decodable {
+struct NasaCollection: Codable {
 
     enum CodingKeys: CodingKey {
         case collection
@@ -28,6 +28,14 @@ struct NasaCollection: Decodable {
         self.href = href
         self.links = links
         self.items = items
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var collectionContainer = container.nestedContainer(keyedBy: CollectionKeys.self, forKey: .collection)
+        try collectionContainer.encode(href, forKey: .href)
+        try collectionContainer.encode(items, forKey: .items)
+        try collectionContainer.encodeIfPresent(links, forKey: .links)
     }
     
     init(from decoder: Decoder) throws {

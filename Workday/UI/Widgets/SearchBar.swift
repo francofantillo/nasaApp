@@ -2,7 +2,7 @@
 //  SearchBar.swift
 //  Invoicer
 //
-//  Created by Franco Fantillo on 2022-09-05.
+//  Created by Franco Fantillo 
 //
 
 import SwiftUI

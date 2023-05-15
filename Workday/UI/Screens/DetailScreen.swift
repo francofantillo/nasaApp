@@ -2,7 +2,7 @@
 //  DetailScreen.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2022-12-08.
+//  Created by Franco Fantillo 
 //
 
 import SwiftUI

@@ -2,12 +2,12 @@
 //  NasaItem.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2022-12-03.
+//  Created by Franco Fantillo 
 //
 
 import Foundation
 
-struct NasaItem: Decodable, Identifiable, Equatable {
+struct NasaItem: Codable, Identifiable, Equatable {
     
     static func == (lhs: NasaItem, rhs: NasaItem) -> Bool {
         lhs.id == rhs.id
@@ -28,6 +28,13 @@ struct NasaItem: Decodable, Identifiable, Equatable {
         self.data = data
         self.href = href
         self.links = links
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(data, forKey: .data)
+        try container.encode(href, forKey: .href)
+        try container.encode(links, forKey: .links)
     }
     
     init(from decoder: Decoder) throws {

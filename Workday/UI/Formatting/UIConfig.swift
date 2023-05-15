@@ -2,7 +2,7 @@
 //  UIConfig.swift
 //  Workday
 //
-//  Created by Franco Fantillo on 2023-05-14.
+//  Created by Franco Fantillo 
 //
 
 import Foundation
