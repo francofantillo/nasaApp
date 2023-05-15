@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 @testable import Workday
 
-final class WorkdayTests: XCTestCase {
+final class NetworkTests: XCTestCase {
 
     var httpClientSuccess: HttpClient!
     var httpClientFail400: HttpClient!

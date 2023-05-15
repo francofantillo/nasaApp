@@ -65,7 +65,8 @@ struct NasaList: View {
         VStack {
             
             SearchBar(text: searchStringBinding, onEditMethod: nil)
-                .padding(config.searchBarPadding)
+                .padding(config.quarterPadding)
+                
             if !viewModel.items.isEmpty {
                 List {
                     ForEach(viewModel.items) { item in
@@ -86,7 +87,7 @@ struct NasaList: View {
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(PlainListStyle())
-                .padding([.leading, .trailing])
+                .padding([.leading, .trailing], .zero)
             }
             Spacer()
         }

@@ -13,6 +13,7 @@ struct SearchBar: View {
     @State private var isEditing = false
     @Binding var text: String
     private var onEditMethod: (() -> Void)?
+    let config = UIConfig()
     
     init(text: Binding<String>, onEditMethod: (() -> Void)?) {
         self._text = text
@@ -30,18 +31,18 @@ struct SearchBar: View {
                 Text("Search ...").foregroundColor(Color(UIColor.gray.cgColor))
             })
             .submitLabel(.done)
-            .padding(7)
-            .padding(.horizontal, 25)
+            .padding(config.halfPadding)
+            .padding(.horizontal, config.titlePadding)
             .foregroundColor(Color("DarkGray"))
             .background(Color("LightGray"))
 
-            .cornerRadius(8)
+            .cornerRadius(config.cardCornerRadius)
             .overlay(
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 8)
+                        .frame(minWidth: .zero, maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, config.halfPadding)
              
                     if isEditing {
                         Button(action: {
@@ -49,7 +50,7 @@ struct SearchBar: View {
                         }) {
                             Image(systemName: "multiply.circle.fill")
                                 .foregroundColor(.gray)
-                                .padding(.trailing, 8)
+                                .padding(.trailing, config.halfPadding)
                         }
                     }
                 }
@@ -63,13 +64,13 @@ struct SearchBar: View {
     }
 }
 
-//struct SearchBar_Previews: PreviewProvider {
-//
-//    static var previews: some View {
-//
-//        var bool = FocusState()
-//        ZStack {
-//            SearchBar(text: Binding<String>.constant("search"))
-//        }
-//    }
-//}
+struct SearchBar_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        var bool = FocusState()
+        ZStack {
+            SearchBar(text: Binding<String>.constant("search"), onEditMethod: {})
+        }
+    }
+}

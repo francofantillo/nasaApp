@@ -20,23 +20,28 @@ struct DetailScreen: View {
                 Text(vm.title)
                     .font(.system(size: config.titleFontSize))
                     .padding(.bottom, config.titlePadding)
-                
-                AsyncImage(url: URL(string: vm.imageURL)) { phase in
-                    switch phase {
-                    case .failure:
-                        Image(systemName: "photo")
-                            .font(.largeTitle)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    default: ProgressView()
+                ZStack {
+                    AsyncImage(url: URL(string: vm.imageURL)) { phase in
+                        switch phase {
+                        case .failure:
+                            Image(systemName: "photo")
+                                .font(.largeTitle)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        default: ProgressView()
+                        }
                     }
+                    .frame(width: config.imageWidth, height: config.imageWidth)
+                    .clipShape(RoundedRectangle(cornerRadius: config.imageWidth/2))
+                    .padding()
+                    
                 }
-                .frame(width: config.imageWidth, height: config.imageWidth)
-                .clipShape(RoundedRectangle(cornerRadius: config.imageWidth/2))
-                .padding([.bottom])
-                
+                .background(.gray)
+                .cornerRadius(config.cardCornerRadius)
+                .padding(.bottom, config.padding)
+            
                 HStack {
                     Text("Date Created:")
                     Text(vm.date)

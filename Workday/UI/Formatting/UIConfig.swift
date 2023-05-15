@@ -10,6 +10,8 @@ import Foundation
 struct UIConfig {
     
     let padding: CGFloat = 16
+    let halfPadding: CGFloat = 8
+    let quarterPadding: CGFloat = 4
     let titlePadding: CGFloat = 25
     let titleFontSize: CGFloat = 30
     let textPadding: CGFloat = 4
