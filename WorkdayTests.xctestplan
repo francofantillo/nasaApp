@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "76804299-98AE-4AC1-A2FC-C4CCD66E0C43",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Workday.xcodeproj",
+        "identifier" : "BA3C8150293B13FF00106EFC",
+        "name" : "WorkdayTests"
+      }
+    }
+  ],
+  "version" : 1
+}

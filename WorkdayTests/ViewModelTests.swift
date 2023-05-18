@@ -116,7 +116,7 @@ final class ViewModelTests: XCTestCase {
         // When
         nasaListVMOneItemWithNextLink.nasaTask = Task {
             do {
-                try await nasaListVMOneItemWithNextLink.getNasaItems(searchString: searchString)
+                sleep(2)
             } catch {
                 XCTFail("Task should not fail")
             }

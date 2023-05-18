@@ -67,6 +67,7 @@
 		BA3C815B293B13FF00106EFC /* WorkdayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkdayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C8170293B271E00106EFC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA6139F02A12BEBD00FFD215 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BA6139F22A12C27900FFD215 /* WorkdayTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = WorkdayTests.xctestplan; sourceTree = "<group>"; };
 		BAA74486293BEB2400CE4DD2 /* ErrorHandlingViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlingViewModifier.swift; sourceTree = "<group>"; };
 		BAA74488293BEB5900CE4DD2 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		BAA7448A293C0C4A00CE4DD2 /* NasaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaData.swift; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		BA3C8137293B13FE00106EFC = {
 			isa = PBXGroup;
 			children = (
+				BA6139F22A12C27900FFD215 /* WorkdayTests.xctestplan */,
 				BA6139F02A12BEBD00FFD215 /* README.md */,
 				BA3C8142293B13FE00106EFC /* Workday */,
 				BA3C8154293B13FF00106EFC /* WorkdayTests */,
