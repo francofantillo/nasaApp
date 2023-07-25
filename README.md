@@ -1,5 +1,5 @@
-# Workday
-Workday Project
+# Nasa App
+Deno Project
 
 This project's purpose in to expose the search functionality of the NASA Image and Video Library API.
 
