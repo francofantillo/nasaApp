@@ -1,5 +1,5 @@
 # Nasa App
-Deno Project
+Demo Project
 
 This project's purpose in to expose the search functionality of the NASA Image and Video Library API.
 
