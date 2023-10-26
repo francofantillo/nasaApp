@@ -104,7 +104,7 @@ final class ViewModelTests: XCTestCase {
         
         try! await nasaListVMOneItemWithNextLink.getNextPage()
         
-        sleep(1)
+        ///sleep(1)
         print(nasaListVMOneItemWithNextLink.items.count)
         XCTAssert(nasaListVMOneItemWithNextLink.items.count == 2)
     }

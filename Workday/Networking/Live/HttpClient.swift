@@ -21,8 +21,6 @@ protocol URLSessionDataTaskProtocol {
 //MARK: HttpClient Implementation
 class HttpClient {
     
-    typealias completeClosure = ( _ result: Result<(Data, URLResponse), Error>) -> Void
-    
     private let session: URLSessionProtocol
     
     private var dataTask: URLSessionDataTaskProtocol!
