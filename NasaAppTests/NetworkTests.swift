@@ -8,7 +8,7 @@
 import XCTest
 import Foundation
 import SwiftUI
-@testable import Workday
+@testable import NasaApp
 
 final class NetworkTests: XCTestCase {
 

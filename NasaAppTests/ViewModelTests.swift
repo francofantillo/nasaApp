@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Workday
+@testable import NasaApp
 
 final class ViewModelTests: XCTestCase {
     
