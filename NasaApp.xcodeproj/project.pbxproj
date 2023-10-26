@@ -27,7 +27,7 @@
 		BA9816352AEAEA2F00337398 /* CollectionLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98161A2AEAEA2F00337398 /* CollectionLinks.swift */; };
 		BA9816362AEAEA2F00337398 /* NasaLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98161B2AEAEA2F00337398 /* NasaLinks.swift */; };
 		BA9816372AEAEA2F00337398 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA98161D2AEAEA2F00337398 /* Preview Assets.xcassets */; };
-		BA9816382AEAEA2F00337398 /* WorkdayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98161F2AEAEA2F00337398 /* WorkdayApp.swift */; };
+		BA9816382AEAEA2F00337398 /* NasaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA98161F2AEAEA2F00337398 /* NasaApp.swift */; };
 		BA9816392AEAEA2F00337398 /* ErrorHandlingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9816212AEAEA2F00337398 /* ErrorHandlingViewModifier.swift */; };
 		BA98163A2AEAEA2F00337398 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9816222AEAEA2F00337398 /* Extensions.swift */; };
 		BA98163B2AEAEA2F00337398 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9816232AEAEA2F00337398 /* Router.swift */; };
@@ -71,7 +71,7 @@
 		BA98161B2AEAEA2F00337398 /* NasaLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NasaLinks.swift; sourceTree = "<group>"; };
 		BA98161D2AEAEA2F00337398 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA98161E2AEAEA2F00337398 /* NasaApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = NasaApp.entitlements; sourceTree = "<group>"; };
-		BA98161F2AEAEA2F00337398 /* WorkdayApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkdayApp.swift; sourceTree = "<group>"; };
+		BA98161F2AEAEA2F00337398 /* NasaApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NasaApp.swift; sourceTree = "<group>"; };
 		BA9816212AEAEA2F00337398 /* ErrorHandlingViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlingViewModifier.swift; sourceTree = "<group>"; };
 		BA9816222AEAEA2F00337398 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA9816232AEAEA2F00337398 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 				BA9816152AEAEA2F00337398 /* Models */,
 				BA98161C2AEAEA2F00337398 /* Preview Content */,
 				BA98161E2AEAEA2F00337398 /* NasaApp.entitlements */,
-				BA98161F2AEAEA2F00337398 /* WorkdayApp.swift */,
+				BA98161F2AEAEA2F00337398 /* NasaApp.swift */,
 				BA9816202AEAEA2F00337398 /* Utility */,
 			);
 			path = NasaApp;
@@ -362,7 +362,7 @@
 				BA98162F2AEAEA2F00337398 /* HttpClient.swift in Sources */,
 				BA9816342AEAEA2F00337398 /* NasaItems.swift in Sources */,
 				BA9816332AEAEA2F00337398 /* NasaCollection.swift in Sources */,
-				BA9816382AEAEA2F00337398 /* WorkdayApp.swift in Sources */,
+				BA9816382AEAEA2F00337398 /* NasaApp.swift in Sources */,
 				BA9816392AEAEA2F00337398 /* ErrorHandlingViewModifier.swift in Sources */,
 				BA98163A2AEAEA2F00337398 /* Extensions.swift in Sources */,
 				BA9816292AEAEA2F00337398 /* NasaList.swift in Sources */,

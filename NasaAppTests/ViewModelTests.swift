@@ -1,6 +1,6 @@
 //
 //  ViewModelTests.swift
-//  WorkdayTests
+//  NasaAppTests
 //
 //  Created by Franco Fantillo
 //

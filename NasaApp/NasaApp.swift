@@ -1,6 +1,6 @@
 //
-//  WorkdayApp.swift
-//  Workday
+//  NasaAppApp.swift
+//  NasaApp
 //
 //  Created by Franco Fantillo
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct WorkdayApp: App {
+struct NasaApp: App {
     
     init(){
         
